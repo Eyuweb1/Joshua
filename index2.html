@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select File Type</title>
+    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <canvas id="snow"></canvas>
+
+    <div class="container">
+        <h1 class="title">Select File Type</h1>
+        <div class="file-options">
+            <div class="option audio">
+                <i class="fas fa-music"></i>
+                <span>Audio</span>
+            </div>
+            <div class="option image">
+                <i class="fas fa-image"></i>
+                <span>Image</span>
+            </div>
+            <div class="option video">
+                <i class="fas fa-video"></i>
+                <span>Video</span>
+            </div>
+            <div class="option document">
+                <i class="fas fa-file-alt"></i>
+                <span>Document</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("snow");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let flakes = [];
+
+        function createFlakes() {
+            for (let i = 0; i < 100; i++) {
+                flakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 4 + 1,
+                    density: Math.random() * flakes.length
+                });
+            }
+        }
+
+        function drawFlakes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            for (let i = 0; i < flakes.length; i++) {
+                let f = flakes[i];
+                ctx.moveTo(f.x, f.y);
+                ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+            moveFlakes();
+        }
+
+        let angle = 0;
+
+        function moveFlakes() {
+            angle += 0.01;
+            for (let i = 0; i < flakes.length; i++) {
+                let f = flakes[i];
+                f.y += Math.cos(angle + f.density) + 1 + f.radius / 2;
+                f.x += Math.sin(angle) * 2;
+
+                if (f.y > canvas.height) {
+                    flakes[i] = {
+                        x: Math.random() * canvas.width,
+                        y: 0,
+                        radius: f.radius,
+                        density: f.density
+                    };
+                }
+            }
+        }
+
+        function animateSnow() {
+            drawFlakes();
+            requestAnimationFrame(animateSnow);
+        }
+
+        createFlakes();
+        animateSnow();
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+
+</body>
+
+</html>

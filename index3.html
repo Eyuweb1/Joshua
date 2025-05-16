@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in for our security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #5255ee, #e73c7e, #23a6d5, #4923d5);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-field:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-hover {
+            transition: all 0.3s ease;
+            background-size: 200% auto;
+        }
+
+        .btn-hover:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .success-check {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2s ease-in-out forwards;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translateX(-1px);
+            }
+
+            20%,
+            80% {
+                transform: translateX(2px);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translateX(-4px);
+            }
+
+            40%,
+            60% {
+                transform: translateX(4px);
+            }
+        }
+    </style>
+</head>
+
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="relative max-w-md w-full">
+        <!-- Floating decorative elements -->
+        <div class="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-white bg-opacity-10 blur-xl"></div>
+        <div class="absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-white bg-opacity-10 blur-xl"></div>
+
+        <!-- Main login card -->
+        <div
+            class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-white border-opacity-20 transform transition-all duration-500 hover:scale-[1.01]">
+            <div class="p-10">
+                <!-- Logo/Header -->
+                <div class="text-center mb-10">
+                    <div class="floating inline-block mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
+                    <p class="text-white text-opacity-70">Sign in to access your secure portal</p>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-white mb-2">Username</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-white text-opacity-70"></i>
+                            </div>
+                            <input type="text" id="username" name="username" required
+                                class="input-field pl-10 w-full px-4 py-3 rounded-xl bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                                placeholder="Enter your username">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-white mb-2">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-white text-opacity-70"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                class="input-field pl-10 w-full px-4 py-3 rounded-xl bg-white bg-opacity-10 border border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                                placeholder="Enter your password">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                                onclick="togglePasswordVisibility()">
+                                <i id="eyeIcon"
+                                    class="fas fa-eye-slash text-white text-opacity-70 hover:text-opacity-100"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember-me" name="remember-me" type="checkbox"
+                                class="h-4 w-4 rounded bg-white bg-opacity-10 border-white border-opacity-50 text-white focus:ring-white focus:ring-opacity-50">
+                            <label for="remember-me" class="ml-2 block text-sm text-white">Remember me</label>
+                        </div>
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-white hover:text-opacity-80 transition">Forgot
+                                password?</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                            class="btn-hover w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white focus:ring-opacity-50">
+                            Sign in
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="successMessage" class="hidden mt-8 p-6 bg-white bg-opacity-10 rounded-xl text-center">
+                    <div class="flex justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="success-check">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Login Successful!</h3>
+                    <p class="text-white text-opacity-80">Welcome back to your account.</p>
+                    <button onclick="resetForm()"
+                        class="mt-4 px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white hover:bg-opacity-30 transition"><a href="index2.html">Visit
+                        your files</a></button>
+                </div>
+            </div>
+
+            <div class="px-8 py-4 bg-white bg-opacity-5 text-center">
+                <p class="text-white text-opacity-70 text-sm">
+                    Don't have an account? <a href="#"
+                        class="font-medium text-white hover:text-opacity-80 transition">sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const form = document.getElementById('loginForm');
+            const successMessage = document.getElementById('successMessage');
+            const passwordInput = document.getElementById('password');
+
+            if (password === "Jehoshua") {
+                // Success - show animation
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+
+                // Add floating particles for celebration
+                createParticles();
+            } else {
+                // Error - shake animation
+                passwordInput.classList.add('shake');
+                passwordInput.focus();
+
+                // Remove shake class after animation completes
+                setTimeout(() => {
+                    passwordInput.classList.remove('shake');
+                }, 500);
+
+                // Show error message
+                alert('Incorrect password. Please try again.');
+            }
+        });
+
+        // Reset form after successful login
+        function resetForm() {
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+
+        // Create floating particles for celebration
+        function createParticles() {
+            const container = document.querySelector('.relative');
+
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('absolute', 'rounded-full', 'bg-white', 'bg-opacity-50');
+
+                // Random properties
+                const size = Math.random() * 8 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 3 + 2;
+                const delay = Math.random() * 2;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                particle.style.opacity = '0.7';
+
+                container.appendChild(particle);
+
+                // Remove particles after animation completes
+                setTimeout(() => {
+                    particle.remove();
+                }, 10000);
+            }
+        }
+    </script>
+</body>
+
+</html>
