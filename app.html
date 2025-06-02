@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eyasu's Website</title>
+  <style>
+    /* Preloader Styles */
+    #preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: radial-gradient(circle at 20% 50%, #120136 0%, #035aa6 40%, #40bad5 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Animated background particles */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+      width: 10px;
+      height: 10px;
+    }
+
+    .particle:nth-child(2) {
+      left: 40%;
+      animation-delay: 2s;
+      width: 15px;
+      height: 15px;
+    }
+
+    .particle:nth-child(3) {
+      left: 60%;
+      animation-delay: 4s;
+      width: 8px;
+      height: 8px;
+    }
+
+    .particle:nth-child(4) {
+      left: 80%;
+      animation-delay: 1s;
+      width: 12px;
+      height: 12px;
+    }
+
+    .particle:nth-child(5) {
+      left: 10%;
+      animation-delay: 3s;
+      width: 6px;
+      height: 6px;
+    }
+
+    .particle:nth-child(6) {
+      left: 70%;
+      animation-delay: 1.5s;
+      width: 18px;
+      height: 18px;
+    }
+
+    .particle:nth-child(7) {
+      left: 30%;
+      animation-delay: 2.5s;
+      width: 7px;
+      height: 7px;
+    }
+
+    .particle:nth-child(8) {
+      left: 50%;
+      animation-delay: 3.5s;
+      width: 14px;
+      height: 14px;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Advanced loader container */
+    .loader-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Multiple spinning rings */
+    .loader {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 40px;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid transparent;
+    }
+
+    .ring:nth-child(1) {
+      width: 120px;
+      height: 120px;
+      border-top: 3px solid #ff6b6b;
+      border-right: 3px solid #4ecdc4;
+      animation: rotate 1.5s linear infinite;
+    }
+
+    .ring:nth-child(2) {
+      width: 90px;
+      height: 90px;
+      top: 15px;
+      left: 15px;
+      border-top: 3px solid #45b7d1;
+      border-left: 3px solid #f9ca24;
+      animation: rotate 2s linear infinite reverse;
+    }
+
+    .ring:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      top: 30px;
+      left: 30px;
+      border-top: 3px solid #6c5ce7;
+      border-bottom: 3px solid #fd79a8;
+      animation: rotate 1s linear infinite;
+    }
+
+    /* Central pulsing dot */
+    .center-dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border-radius: 50%;
+      top: 50px;
+      left: 50px;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+      }
+
+      50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+      }
+    }
+
+    /* Animated text */
+    .loader-text {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .letter {
+      display: inline-block;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    .letter:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .letter:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .letter:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .letter:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .letter:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes wave {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      30% {
+        transform: translateY(-10px) scale(1.1);
+      }
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 30px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #6c5ce7);
+      background-size: 200% 100%;
+      animation: gradient-shift 2s linear infinite;
+    }
+
+    @keyframes progress {
+      0% {
+        width: 0%;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* Loading text */
+    .loading-text {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      margin-top: 15px;
+      animation: fade-in-out 2s ease-in-out infinite;
+    }
+
+    @keyframes fade-in-out {
+
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Main content styles */
+    .main-content {
+      display: none;
+      padding: 50px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .content-loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main-content h1 {
+      color: #333;
+      font-size: 3.5rem;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .main-content h1::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4px;
+      bottom: -10px;
+      left: 50%;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+      transform: translateX(-50%);
+      transition: width 1.5s ease 0.5s;
+    }
+
+    .content-loaded h1::after {
+      width: 100%;
+    }
+
+    .main-content p {
+      color: #666;
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.8;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 1s ease 0.8s, opacity 1s ease 0.8s;
+    }
+
+    .content-loaded p {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .content-element {
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      transition-delay: 1.2s;
+    }
+
+    .content-loaded .content-element {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+
+    .button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(108, 92, 231, 0.6);
+    }
+
+    /* Fade out animation for preloader */
+    .fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.8s ease-out;
+      pointer-events: none;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="loader-container">
+      <div class="loader">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="center-dot"></div>
+      </div>
+      <div class="loader-text">
+        <span class="letter">J</span>
+        <span class="letter">O</span>
+        <span class="letter">S</span>
+        <span class="letter">H</span>
+        <span class="letter">A</span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="loading-text">Loading your experience...</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="main-content">
+    <h1>Welcome to Joshua's World</h1>
+    <p>Thank you for your patience! Your immersive experience is now ready to explore with stunning animations including
+      floating particles, multi-ring loader, animated text with wave effect, gradient progress bar, and smooth
+      transitions.</p>
+    <div class="content-element">
+      <a href="index.html" class="button">Explore More</a>
+    </div>
+  </div>
+
+  <script>
+    // Preloader functionality with enhanced animations
+    window.addEventListener('load', function () {
+      const preloader = document.getElementById('preloader');
+      const mainContent = document.getElementById('main-content');
+      const progressBar = document.getElementById('progress-bar');
+
+      // Simulate loading progress
+      let progress = 0;
+      const interval = setInterval(function () {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+
+          // When loading is complete
+          setTimeout(function () {
+            preloader.classList.add('fade-out');
+
+            setTimeout(function () {
+              preloader.style.display = 'none';
+              mainContent.style.display = 'block';
+
+              // Add a small delay before adding the loaded class for a smoother effect
+              setTimeout(function () {
+                mainContent.classList.add('content-loaded');
+              }, 100);
+            }, 800); // Wait for fade-out animation to complete
+          }, 500); // Small delay after reaching 100%
+        }
+        progressBar.style.width = progress + '%';
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>
